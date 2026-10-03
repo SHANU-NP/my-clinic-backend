@@ -1,0 +1,28 @@
+package com.myclinic.backend.controller;
+
+import com.myclinic.backend.model.request.ClinicRegistrationRequest;
+import com.myclinic.backend.model.response.ClinicRegistrationResponse;
+import com.myclinic.backend.service.AdminService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/v1/admin")
+public class AdminController {
+
+
+    private final AdminService adminService;
+
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
+    @PostMapping("/register-clinic")
+    public ClinicRegistrationResponse registerClinic(@RequestBody ClinicRegistrationRequest request) {
+        return adminService.registerClinic(request);
+    }
+
+
+}
