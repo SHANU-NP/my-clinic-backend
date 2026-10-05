@@ -3,6 +3,7 @@ package com.myclinic.backend.util;
 import com.myclinic.backend.exceptions.InvalidRequestExceptions;
 import com.myclinic.backend.model.request.ClinicRegistrationRequest;
 import com.myclinic.backend.model.request.DoctorRegistrationRequest;
+import com.myclinic.backend.model.request.ReceptionistRegistrationRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,4 +33,16 @@ public class AdminValidator {
 
 
     }
+
+    public void validateReceptionistRegistrationRequest(ReceptionistRegistrationRequest request){
+        validateNotBlank("receptionistName", request.getReceptionistName());
+        validateNotBlank("receptionistContactNumber",request.getReceptionistContactNumber());
+        validateNotBlank("receptionistEmail", request.getReceptionistEmail());
+        validateNotBlank("clinicId", String.valueOf(request.getClinicId()));
+
+    }
+
+
+
+
 }

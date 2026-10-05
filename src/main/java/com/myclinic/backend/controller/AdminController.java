@@ -3,9 +3,11 @@ package com.myclinic.backend.controller;
 import com.myclinic.backend.model.request.ClinicFetchRequest;
 import com.myclinic.backend.model.request.ClinicRegistrationRequest;
 import com.myclinic.backend.model.request.DoctorRegistrationRequest;
+import com.myclinic.backend.model.request.ReceptionistRegistrationRequest;
 import com.myclinic.backend.model.response.ClinicRegistrationResponse;
 import com.myclinic.backend.model.response.ClinicResponse;
 import com.myclinic.backend.model.response.DoctorRegistrationResponse;
+import com.myclinic.backend.model.response.ReceptionistRegistrationResponse;
 import com.myclinic.backend.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,11 @@ public class AdminController {
     public DoctorRegistrationResponse registerDoctor(@RequestBody DoctorRegistrationRequest request) {
         return adminService.registerDoctor(request);
     }
+
+    @PostMapping ("/register-receptionist")
+        public ReceptionistRegistrationResponse registerReceptionist(@RequestBody ReceptionistRegistrationRequest request){
+        return adminService.registerReceptionist(request);
+        }
 
 
 }

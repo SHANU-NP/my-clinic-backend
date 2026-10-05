@@ -8,5 +8,8 @@ public class AdminConstants {
     public static final String DOCTOR_PREFIX = "DOC";
     public static final String CLINIC_REGISTRATION_SUCCESSFUL = "Clinic registered successfully";
     public static final String CLINIC_NOT_FOUND = "Clinic not found , please try with a valid clinic id";
+    public static final String ROLE_DOCTOR = "DOCTOR";
+    public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
+    public static final String ROLE_PHARMACIST = "PHARMACIST";
 
 }

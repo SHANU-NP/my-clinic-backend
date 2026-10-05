@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ClinicRegistrationResponse {
 
-    private String clinicId;
+    private Long clinicId;
     private String name;
     private String message;
 }

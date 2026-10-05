@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClinicResponse {
 
-    private String clinicId;
+    private Long clinicId;
     private String clinicName;
 
 }
