@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ReceptionistRegistrationRequest {
     private Long clinicId;
     private String receptionistName;
-    private String receptionistContactNumber;
-    private String receptionistEmail;
+    private String contactNumber;
+    private String email;
 
 }

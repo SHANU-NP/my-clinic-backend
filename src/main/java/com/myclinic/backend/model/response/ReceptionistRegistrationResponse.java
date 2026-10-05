@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReceptionistRegistrationResponse {
 
+    private Long clinicId;
+    private String clinicName;
     private Long receptionistId;
     private String receptionistName;
-    private String receptionistContactNumber;
+    private String contactNumber;
     private String email;
-    private String clinicId;
-    private String clinicName;
+
 
 }

@@ -17,9 +17,9 @@ public class DoctorRepositoryHandler {
     public DoctorRegistrationResponse registerDoctor(DoctorDetails newDoctor) {
         DoctorDetails savedDoctor = doctorRepository.save(newDoctor);
         return new DoctorRegistrationResponse(
-                savedDoctor.getClinicId(),
+                Long.valueOf(savedDoctor.getClinicId()),
                 savedDoctor.getClinicName(),
-                savedDoctor.getId().toString(),
+                savedDoctor.getId(),
                 savedDoctor.getDoctorName(),
                 savedDoctor.getDesignation(),
                 savedDoctor.getSpecialization()

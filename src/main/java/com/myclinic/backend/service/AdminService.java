@@ -2,16 +2,11 @@ package com.myclinic.backend.service;
 
 import com.myclinic.backend.entity.Clinic;
 import com.myclinic.backend.entity.DoctorDetails;
+import com.myclinic.backend.entity.PharmacistDetails;
 import com.myclinic.backend.entity.ReceptionistDetails;
 import com.myclinic.backend.exceptions.InvalidRequestExceptions;
-import com.myclinic.backend.model.request.ClinicFetchRequest;
-import com.myclinic.backend.model.request.ClinicRegistrationRequest;
-import com.myclinic.backend.model.request.DoctorRegistrationRequest;
-import com.myclinic.backend.model.request.ReceptionistRegistrationRequest;
-import com.myclinic.backend.model.response.ClinicRegistrationResponse;
-import com.myclinic.backend.model.response.ClinicResponse;
-import com.myclinic.backend.model.response.DoctorRegistrationResponse;
-import com.myclinic.backend.model.response.ReceptionistRegistrationResponse;
+import com.myclinic.backend.model.request.*;
+import com.myclinic.backend.model.response.*;
 import com.myclinic.backend.service.repositoryHandler.AdminRepositoryHandler;
 import com.myclinic.backend.util.AdminValidator;
 import org.springframework.stereotype.Service;
@@ -92,8 +87,8 @@ public class AdminService {
 
         ReceptionistDetails newReceptionist = new ReceptionistDetails();
         newReceptionist.setName(request.getReceptionistName());
-        newReceptionist.setContactNumber(request.getReceptionistContactNumber());
-        newReceptionist.setEmail(request.getReceptionistEmail());
+        newReceptionist.setContactNumber(request.getContactNumber());
+        newReceptionist.setEmail(request.getEmail());
         newReceptionist.setClinicId(clinic.getId().toString());
         newReceptionist.setClinicName(clinic.getName());
         newReceptionist.setRole(ROLE_RECEPTIONIST);
@@ -102,12 +97,20 @@ public class AdminService {
     }
 
 
+    public PharmacistRegResponse registerPharmacist(PharmacistRegistrationRequest request) {
+        adminValidator.validatePharmacistRegistrationRequest(request);
 
+        Clinic clinic = adminRepositoryHandler.findClinicById(request.getClinicId())
+                .orElseThrow(() -> new InvalidRequestExceptions(CLINIC_NOT_FOUND));
 
+        PharmacistDetails newPharmacist = new PharmacistDetails();
+        newPharmacist.setName(request.getPharmacistName());
+        newPharmacist.setContactNumber(request.getContactNumber());
+        newPharmacist.setEmail(request.getEmail());
+        newPharmacist.setClinicId(clinic.getId().toString());
+        newPharmacist.setClinicName(clinic.getName());
+        newPharmacist.setRole(ROLE_PHARMACIST);
+        return adminRepositoryHandler.registerPharmacist(newPharmacist);
 
-
-
-
-
-
+    }
 }

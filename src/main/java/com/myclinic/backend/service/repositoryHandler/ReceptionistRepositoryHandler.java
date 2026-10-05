@@ -16,13 +16,12 @@ public class ReceptionistRepositoryHandler {
     public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails  newReceptionist){
         ReceptionistDetails savedReceptionist =  receptionistRepository.save(newReceptionist);
         return new ReceptionistRegistrationResponse(
+                Long.valueOf(savedReceptionist.getClinicId()),
+                savedReceptionist.getClinicName(),
                 savedReceptionist.getId(),
-                savedReceptionist.getName(),
                 savedReceptionist.getContactNumber(),
                 savedReceptionist.getEmail(),
-                savedReceptionist.getClinicId(),
-                savedReceptionist.getClinicName()
-
+                savedReceptionist.getClinicId()
         );
     }
 

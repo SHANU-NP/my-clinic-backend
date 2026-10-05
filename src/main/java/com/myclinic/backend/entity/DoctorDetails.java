@@ -1,12 +1,13 @@
 package com.myclinic.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "doctor_details")
-public class DoctorDetails {
+public class DoctorDetails extends  DBTimeStamp {
 
 
     @Id

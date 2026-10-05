@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorRegistrationResponse {
+public class PharmacistRegResponse {
 
     private Long clinicId;
     private String clinicName;
-    private Long doctorId;
-    private String doctorName;
-    private String designation;
-    private String specialization;
+    private Long pharmacistId;
+    private String pharmacistName;
+    private String pharmacistContactNumber;
+    private String pharmacistEmail;
+
 }

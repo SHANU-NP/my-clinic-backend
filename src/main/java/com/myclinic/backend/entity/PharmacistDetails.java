@@ -3,18 +3,15 @@ package com.myclinic.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
 @Entity
 @Setter
 @Getter
-@Table(name = "receptionist_details")
-public class ReceptionistDetails extends  DBTimeStamp{
-
+@Table(name = "pharmacist_details")
+public class PharmacistDetails extends  DBTimeStamp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rsp_seq")
-    @SequenceGenerator(name = "rsp_seq", sequenceName = "rsp_seq",initialValue = 3000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prmst_seq")
+    @SequenceGenerator(name = "prmst_seq", sequenceName = "prmst_seq",initialValue = 9000, allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)
@@ -26,7 +23,7 @@ public class ReceptionistDetails extends  DBTimeStamp{
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "clinic_id",nullable = false)
+    @Column(name = "clinic_id", nullable = false)
     private String clinicId;
 
     @Column(name = "clinic_name",nullable = false)
@@ -34,5 +31,4 @@ public class ReceptionistDetails extends  DBTimeStamp{
 
     @Column(name = "role")
     private String role;
-
 }

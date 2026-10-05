@@ -3,9 +3,11 @@ package com.myclinic.backend.service.repositoryHandler;
 import com.myclinic.backend.constants.AdminConstants;
 import com.myclinic.backend.entity.Clinic;
 import com.myclinic.backend.entity.DoctorDetails;
+import com.myclinic.backend.entity.PharmacistDetails;
 import com.myclinic.backend.entity.ReceptionistDetails;
 import com.myclinic.backend.model.response.ClinicRegistrationResponse;
 import com.myclinic.backend.model.response.DoctorRegistrationResponse;
+import com.myclinic.backend.model.response.PharmacistRegResponse;
 import com.myclinic.backend.model.response.ReceptionistRegistrationResponse;
 import com.myclinic.backend.repository.ClinicRepository;
 import org.springframework.stereotype.Service;
@@ -21,10 +23,13 @@ public class AdminRepositoryHandler {
     private final DoctorRepositoryHandler doctorRepositoryHandler;
     private final ReceptionistRepositoryHandler receptionistRepositoryHandler;
 
-    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler) {
+    private final PharmacistRepoHandler pharmacistRepositoryHandler;
+
+    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler) {
         this.clinicRepository = clinicRepository;
         this.doctorRepositoryHandler = doctorRepositoryHandler;
         this.receptionistRepositoryHandler = receptionistRepositoryHandler;
+        this.pharmacistRepositoryHandler = pharmacistRepositoryHandler;
     }
 
 
@@ -53,5 +58,9 @@ public class AdminRepositoryHandler {
 
     public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails newReceptionist){
         return  receptionistRepositoryHandler.registerReceptionist(newReceptionist);
+    }
+
+    public PharmacistRegResponse registerPharmacist(PharmacistDetails newPharmacist) {
+        return pharmacistRepositoryHandler.registerPharmacist(newPharmacist);
     }
 }
