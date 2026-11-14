@@ -11,11 +11,16 @@ import java.util.UUID;
 @Table(name = "receptionist_details")
 public class ReceptionistDetails extends  DBTimeStamp{
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rsp_seq")
-    @SequenceGenerator(name = "rsp_seq", sequenceName = "rsp_seq",initialValue = 3000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     private Long id;
+
+    @Column(name = "clinic_id", nullable = false)
+    private String clinicId;
+
+    @Column(name = "clinic_name",nullable = false)
+    private String clinicName;
 
     @Column(nullable = false)
     private String name;
@@ -26,13 +31,13 @@ public class ReceptionistDetails extends  DBTimeStamp{
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "clinic_id",nullable = false)
-    private String clinicId;
-
-    @Column(name = "clinic_name",nullable = false)
-    private String clinicName;
-
     @Column(name = "role")
     private String role;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
 }

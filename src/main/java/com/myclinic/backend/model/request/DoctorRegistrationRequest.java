@@ -8,5 +8,7 @@ public class DoctorRegistrationRequest {
     private String doctorName;
     private String designation;
     private String specialization;
+    private String username;
+    private String password;
 
 }

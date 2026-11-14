@@ -31,6 +31,8 @@ public class AdminValidator {
         validateNotBlank("designation", request.getDesignation());
         validateNotBlank("specialization", request.getSpecialization());
         validateNotBlank("clinicId", String.valueOf(request.getClinicId()));
+        validateNotBlank("username", request.getUsername());
+        validateNotBlank("password", request.getPassword());
 
 
     }
@@ -40,6 +42,8 @@ public class AdminValidator {
         validateNotBlank("receptionistContactNumber",request.getContactNumber());
         validateNotBlank("receptionistEmail", request.getEmail());
         validateNotBlank("clinicId", String.valueOf(request.getClinicId()));
+        validateNotBlank("username", request.getUsername());
+        validateNotBlank("password", request.getPassword());
 
     }
 
@@ -49,5 +53,7 @@ public class AdminValidator {
             validateNotBlank("pharmacistContactNumber",request.getContactNumber());
             validateNotBlank("pharmacistEmail", request.getEmail());
             validateNotBlank("clinicId", String.valueOf(request.getClinicId()));
+            validateNotBlank("username", request.getUsername());
+            validateNotBlank("password", request.getPassword());
     }
 }

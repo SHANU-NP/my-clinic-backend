@@ -1,5 +1,6 @@
 package com.myclinic.backend.service.repositoryHandler;
 
+import com.myclinic.backend.auth.service.repoHandler.UserAuthRepoHandler;
 import com.myclinic.backend.constants.AdminConstants;
 import com.myclinic.backend.entity.Clinic;
 import com.myclinic.backend.entity.DoctorDetails;
@@ -22,14 +23,15 @@ public class AdminRepositoryHandler {
     private final ClinicRepository clinicRepository;
     private final DoctorRepositoryHandler doctorRepositoryHandler;
     private final ReceptionistRepositoryHandler receptionistRepositoryHandler;
-
     private final PharmacistRepoHandler pharmacistRepositoryHandler;
+    private final UserAuthRepoHandler userAuthRepoHandler;
 
-    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler) {
+    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler, UserAuthRepoHandler userAuthRepoHandler) {
         this.clinicRepository = clinicRepository;
         this.doctorRepositoryHandler = doctorRepositoryHandler;
         this.receptionistRepositoryHandler = receptionistRepositoryHandler;
         this.pharmacistRepositoryHandler = pharmacistRepositoryHandler;
+        this.userAuthRepoHandler = userAuthRepoHandler;
     }
 
 

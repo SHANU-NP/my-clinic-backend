@@ -12,5 +12,7 @@ public class ReceptionistRegistrationRequest {
     private String receptionistName;
     private String contactNumber;
     private String email;
+    private String username;
+    private String password;
 
 }

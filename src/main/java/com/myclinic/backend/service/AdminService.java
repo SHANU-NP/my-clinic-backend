@@ -9,6 +9,7 @@ import com.myclinic.backend.model.request.*;
 import com.myclinic.backend.model.response.*;
 import com.myclinic.backend.service.repositoryHandler.AdminRepositoryHandler;
 import com.myclinic.backend.util.AdminValidator;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ public class AdminService {
 
     private final AdminRepositoryHandler adminRepositoryHandler;
     private final AdminValidator adminValidator;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AdminService(AdminRepositoryHandler adminRepositoryHandler, AdminValidator adminValidator) {
+    public AdminService(AdminRepositoryHandler adminRepositoryHandler, AdminValidator adminValidator, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.adminRepositoryHandler = adminRepositoryHandler;
         this.adminValidator = adminValidator;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -39,9 +42,10 @@ public class AdminService {
         newClinic.setAddress(request.getAddress());
         newClinic.setContactNumber(request.getContactNumber());
         newClinic.setEmail(request.getEmail());
-
         return adminRepositoryHandler.registerClinic(newClinic);
     }
+
+
 
     public List<ClinicResponse> fetchClinic(ClinicFetchRequest request) {
 
@@ -62,6 +66,9 @@ public class AdminService {
         return clinics.stream().map(clinic -> new ClinicResponse(clinic.getId(), clinic.getName())).collect(Collectors.toList());
     }
 
+
+
+
     public DoctorRegistrationResponse registerDoctor(DoctorRegistrationRequest request) {
 
         adminValidator.validateDoctorRegistrationRequest(request);
@@ -76,8 +83,13 @@ public class AdminService {
         newDoctor.setDesignation(request.getDesignation());
         newDoctor.setSpecialization(request.getSpecialization());
         newDoctor.setRole(ROLE_DOCTOR);
+        newDoctor.setUsername(request.getUsername());
+        newDoctor.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         return adminRepositoryHandler.registerDoctor(newDoctor);
     }
+
+
+
 
     public ReceptionistRegistrationResponse registerReceptionist(ReceptionistRegistrationRequest request){
         adminValidator.validateReceptionistRegistrationRequest(request);
@@ -92,9 +104,13 @@ public class AdminService {
         newReceptionist.setClinicId(clinic.getId().toString());
         newReceptionist.setClinicName(clinic.getName());
         newReceptionist.setRole(ROLE_RECEPTIONIST);
+        newReceptionist.setUsername(request.getUsername());
+        newReceptionist.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         return adminRepositoryHandler.registerReceptionist(newReceptionist);
 
     }
+
+
 
 
     public PharmacistRegResponse registerPharmacist(PharmacistRegistrationRequest request) {
@@ -110,6 +126,8 @@ public class AdminService {
         newPharmacist.setClinicId(clinic.getId().toString());
         newPharmacist.setClinicName(clinic.getName());
         newPharmacist.setRole(ROLE_PHARMACIST);
+        newPharmacist.setUsername(request.getUsername());
+        newPharmacist.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         return adminRepositoryHandler.registerPharmacist(newPharmacist);
 
     }

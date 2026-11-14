@@ -9,5 +9,7 @@ public class PharmacistRegistrationRequest {
     private String pharmacistName;
     private String contactNumber;
     private String email;
+    private String username;
+    private String password;
 
 }
