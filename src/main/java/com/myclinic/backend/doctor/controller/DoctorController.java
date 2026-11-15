@@ -1,7 +1,7 @@
 package com.myclinic.backend.doctor.controller;
 
 import com.myclinic.backend.auth.model.response.LoginResponse;
-import com.myclinic.backend.doctor.model.request.LoginReq;
+import com.myclinic.backend.auth.model.request.LoginReq;
 import com.myclinic.backend.doctor.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.myclinic.backend.doctor.model.request;
+package com.myclinic.backend.auth.model.request;
 
 import lombok.Data;
 

@@ -2,7 +2,7 @@ package com.myclinic.backend.doctor.service;
 
 import com.myclinic.backend.auth.model.response.LoginResponse;
 import com.myclinic.backend.auth.service.UserServiceImpl;
-import com.myclinic.backend.doctor.model.request.LoginReq;
+import com.myclinic.backend.auth.model.request.LoginReq;
 import org.springframework.stereotype.Service;
 
 @Service
