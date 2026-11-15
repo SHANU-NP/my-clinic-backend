@@ -1,19 +1,29 @@
 package com.myclinic.backend.doctor.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.myclinic.backend.auth.model.response.LoginResponse;
+import com.myclinic.backend.doctor.model.request.LoginReq;
+import com.myclinic.backend.doctor.service.DoctorService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/doctor")
 public class DoctorController {
 
+    private final DoctorService doctorService;
+
+    public DoctorController(DoctorService doctorService) {
+        this.doctorService = doctorService;
+    }
 
     @GetMapping("/greet")
     public String helloDoctor(){
         return "Hello doctor!...";
     }
 
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginReq loginReq){
+        return doctorService.login(loginReq);
+    }
 
 
 
