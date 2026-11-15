@@ -2,7 +2,7 @@ package com.myclinic.backend.patient.service;
 
 import com.myclinic.backend.admin.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.service.rephandler.PatientRepoHandler;
-import com.myclinic.backend.util.PatientValidator;
+import com.myclinic.backend.patient.util.PatientValidator;
 import org.springframework.stereotype.Service;
 
 @Service
