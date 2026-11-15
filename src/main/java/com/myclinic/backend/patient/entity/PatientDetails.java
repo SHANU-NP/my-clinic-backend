@@ -34,6 +34,9 @@ public class PatientDetails extends DBTimeStamp {
     @Column(name = "contact_number")
     private String contactNumber;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "clinic_id", nullable = false)
     private String clinicId;
 
@@ -42,6 +45,4 @@ public class PatientDetails extends DBTimeStamp {
 
     @Column(name = "role", nullable = false)
     private String role;
-
-
 }

@@ -1,4 +1,4 @@
-package com.myclinic.backend.patient.service;
+package com.myclinic.backend.patient.service.patientOperation;
 
 import com.myclinic.backend.admin.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.service.rephandler.PatientRepoHandler;
@@ -6,21 +6,25 @@ import com.myclinic.backend.patient.util.PatientValidator;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PatientService {
+public class PatientServiceImpl implements PatientService {
 
 
     private final PatientRepoHandler patientRepoHandler;
     private final PatientValidator patientValidator;
 
-    public PatientService(PatientRepoHandler patientRepoHandler, PatientValidator patientValidator) {
+    public PatientServiceImpl(PatientRepoHandler patientRepoHandler, PatientValidator patientValidator) {
         this.patientRepoHandler = patientRepoHandler;
         this.patientValidator = patientValidator;
     }
 
 
-    private void createPatient(PatientRegistrationRequest patientRegistrationRequest){
-        // identify the user and the clinic information from the request and validate the request
+    @Override
+    public void registerPatient(PatientRegistrationRequest patientRegistrationRequest) {
 
     }
 
+    @Override
+    public void addToConsultationQueue(String patientId, String doctorId) {
+
+    }
 }
