@@ -36,6 +36,10 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v1/admin/**").permitAll()
+                        .requestMatchers("/v1/doctor/login").permitAll()
+                        .requestMatchers("/v1/pharmacy/login").permitAll()
+                        .requestMatchers("/v1/reception/login").permitAll()
+
                         .requestMatchers("/v1/doctor/**").hasRole("DOCTOR")
                         .requestMatchers("/v1/pharmacy/**").hasRole("PHARMACIST")
                         .requestMatchers("/v1/reception/**").hasRole("RECEPTIONIST")

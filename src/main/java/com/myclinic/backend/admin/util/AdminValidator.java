@@ -5,9 +5,11 @@ import com.myclinic.backend.admin.model.request.ClinicRegistrationRequest;
 import com.myclinic.backend.admin.model.request.DoctorRegistrationRequest;
 import com.myclinic.backend.admin.model.request.PharmacistRegistrationRequest;
 import com.myclinic.backend.admin.model.request.ReceptionistRegistrationRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class AdminValidator {
 
 
@@ -21,9 +23,15 @@ public class AdminValidator {
 
 
     private void validateNotBlank(String fieldName,String value){
-        if (value.isBlank()) {
-            throw new InvalidRequestExceptions(String.format(" %s can not be blank ", fieldName));
+        try{
+            if (value.isBlank()) {
+                throw new InvalidRequestExceptions(String.format(" %s can not be blank ", fieldName));
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            log.error("error : {}",ex.toString());
         }
+
     }
 
     public void validateDoctorRegistrationRequest(DoctorRegistrationRequest request) {
