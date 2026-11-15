@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.myclinic.backend.constants.AdminConstants.INVALID_CREDENTIALS;
-import static com.myclinic.backend.constants.AdminConstants.LOGIN_FAILED;
+import static com.myclinic.backend.admin.constants.AdminConstants.INVALID_CREDENTIALS;
+import static com.myclinic.backend.admin.constants.AdminConstants.LOGIN_FAILED;
 
 @Service
 public class UserServiceImpl implements UserService {

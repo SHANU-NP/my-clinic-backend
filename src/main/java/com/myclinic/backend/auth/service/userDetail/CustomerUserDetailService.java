@@ -1,6 +1,6 @@
 package com.myclinic.backend.auth.service.userDetail;
 
-import com.myclinic.backend.constants.AdminConstants;
+import com.myclinic.backend.admin.constants.AdminConstants;
 import com.myclinic.backend.auth.entity.UserAuth;
 import com.myclinic.backend.auth.service.repoHandler.UserAuthRepoHandler;
 import org.springframework.security.core.userdetails.UserDetails;
