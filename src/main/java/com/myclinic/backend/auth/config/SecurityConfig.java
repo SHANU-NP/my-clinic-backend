@@ -23,7 +23,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
     private final CustomerUserDetailService customerUserDetailService;
     private final JwtFilter jwtFilter;
 
@@ -33,19 +32,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v1/admin/**").permitAll()
                         .requestMatchers("/v1/doctor/**").hasRole("DOCTOR")
-                        .requestMatchers("/v1/pharmacy/**").hasRole("PHARMACY")
-                        .requestMatchers("/v1/reception/**").hasRole("RECEPTION")
+                        .requestMatchers("/v1/pharmacy/**").hasRole("PHARMACIST")
+                        .requestMatchers("/v1/reception/**").hasRole("RECEPTIONIST")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -53,18 +51,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(customerUserDetailService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration){
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
-
-
 }

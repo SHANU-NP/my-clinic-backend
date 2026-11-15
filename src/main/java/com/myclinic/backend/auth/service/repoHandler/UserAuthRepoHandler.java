@@ -5,6 +5,7 @@ import com.myclinic.backend.auth.repo.UserAuthRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserAuthRepoHandler {
@@ -16,6 +17,18 @@ public class UserAuthRepoHandler {
     }
 
     public Optional<UserAuth> findByUserName(String username) {
-      return userAuthRepository.findByUsername(username);
+        return userAuthRepository.findByUsername(username);
+    }
+
+    public Optional<UserAuth> findByUserId(UUID userId) {
+        return userAuthRepository.findById(userId);
+    }
+
+    public boolean existsByUsername(String username) {
+        return userAuthRepository.findByUsername(username).isPresent();
+    }
+
+    public UserAuth save(UserAuth userAuth) {
+        return userAuthRepository.save(userAuth);
     }
 }

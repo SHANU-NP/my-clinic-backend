@@ -15,13 +15,13 @@ public class PharmacistRepoHandler {
     }
 
     public PharmacistRegResponse registerPharmacist(PharmacistDetails newPharmacist) {
-            PharmacistDetails savedPharmacist = pharmacistRepository.save(newPharmacist);
-            return new PharmacistRegResponse(
-                    Long.valueOf(savedPharmacist.getClinicId()),
-                    savedPharmacist.getClinicName(),
-                    savedPharmacist.getId(),
-                    savedPharmacist.getName(),
-                    savedPharmacist.getContactNumber(),
-                    savedPharmacist.getEmail());
+        PharmacistDetails saved = pharmacistRepository.save(newPharmacist);
+        return new PharmacistRegResponse(
+                Long.valueOf(saved.getClinicId()),
+                saved.getClinicName(),
+                saved.getId(),
+                saved.getName(),
+                saved.getContactNumber(),
+                saved.getEmail());
     }
 }

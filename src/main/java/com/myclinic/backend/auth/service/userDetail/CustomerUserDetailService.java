@@ -1,6 +1,6 @@
 package com.myclinic.backend.auth.service.userDetail;
 
-import com.myclinic.backend.admin.constants.AdminConstants;
+import com.myclinic.backend.auth.constants.AuthConstants;
 import com.myclinic.backend.auth.entity.UserAuth;
 import com.myclinic.backend.auth.service.repoHandler.UserAuthRepoHandler;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +19,8 @@ public class CustomerUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       UserAuth user = userAuthRepoHandler.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException(AdminConstants.USER_NOT_FOUND));
-       return new CustomUserDetails(user);
-
+        UserAuth user = userAuthRepoHandler.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException(AuthConstants.USER_NOT_FOUND));
+        return new CustomUserDetails(user);
     }
 }

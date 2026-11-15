@@ -8,22 +8,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReceptionistRepositoryHandler {
     private final ReceptionistRepository receptionistRepository;
-     public ReceptionistRepositoryHandler(ReceptionistRepository receptionistRepository){
-        this.receptionistRepository = receptionistRepository;
 
+    public ReceptionistRepositoryHandler(ReceptionistRepository receptionistRepository) {
+        this.receptionistRepository = receptionistRepository;
     }
 
-    public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails  newReceptionist){
-        ReceptionistDetails savedReceptionist =  receptionistRepository.save(newReceptionist);
+    public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails newReceptionist) {
+        ReceptionistDetails saved = receptionistRepository.save(newReceptionist);
         return new ReceptionistRegistrationResponse(
-                Long.valueOf(savedReceptionist.getClinicId()),
-                savedReceptionist.getClinicName(),
-                savedReceptionist.getId(),
-                savedReceptionist.getContactNumber(),
-                savedReceptionist.getEmail(),
-                savedReceptionist.getClinicId()
+                Long.valueOf(saved.getClinicId()),
+                saved.getClinicName(),
+                saved.getId(),
+                saved.getName(),
+                saved.getContactNumber(),
+                saved.getEmail()
         );
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.myclinic.backend.auth.entity;
 
+import com.myclinic.backend.admin.entity.DBTimeStamp;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,14 +11,10 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "user_authentication")
-public class UserAuth {
+public class UserAuth extends DBTimeStamp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ser_seq")
-    @SequenceGenerator(name = "ser_seq", sequenceName = "ser_seq", allocationSize = 1)
-    private Long serialId;
-
-    @Column(name = "user_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUID")
     private UUID userId;
 
     @Column(name = "username", nullable = false, unique = true)
@@ -29,5 +26,6 @@ public class UserAuth {
     @Column(name = "role", nullable = false)
     private String role;
 
-
+    @Column(name = "tenant_id")
+    private String tenantId;
 }

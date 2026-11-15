@@ -1,6 +1,5 @@
 package com.myclinic.backend.admin.servce.repoHandler;
 
-import com.myclinic.backend.auth.service.repoHandler.UserAuthRepoHandler;
 import com.myclinic.backend.admin.constants.AdminConstants;
 import com.myclinic.backend.admin.entity.Clinic;
 import com.myclinic.backend.doctor.entity.DoctorDetails;
@@ -27,20 +26,18 @@ public class AdminRepositoryHandler {
     private final DoctorRepositoryHandler doctorRepositoryHandler;
     private final ReceptionistRepositoryHandler receptionistRepositoryHandler;
     private final PharmacistRepoHandler pharmacistRepositoryHandler;
-    private final UserAuthRepoHandler userAuthRepoHandler;
 
-    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler, UserAuthRepoHandler userAuthRepoHandler) {
+    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler) {
         this.clinicRepository = clinicRepository;
         this.doctorRepositoryHandler = doctorRepositoryHandler;
         this.receptionistRepositoryHandler = receptionistRepositoryHandler;
         this.pharmacistRepositoryHandler = pharmacistRepositoryHandler;
-        this.userAuthRepoHandler = userAuthRepoHandler;
     }
 
 
     public ClinicRegistrationResponse registerClinic(Clinic newClinic) {
         Clinic savedClinic = clinicRepository.save(newClinic);
-        return new ClinicRegistrationResponse(savedClinic.getId(),savedClinic.getName(),AdminConstants.CLINIC_REGISTRATION_SUCCESSFUL);
+        return new ClinicRegistrationResponse(savedClinic.getId(), savedClinic.getName(), AdminConstants.CLINIC_REGISTRATION_SUCCESSFUL);
     }
 
 
@@ -61,8 +58,8 @@ public class AdminRepositoryHandler {
         return doctorRepositoryHandler.registerDoctor(newDoctor);
     }
 
-    public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails newReceptionist){
-        return  receptionistRepositoryHandler.registerReceptionist(newReceptionist);
+    public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails newReceptionist) {
+        return receptionistRepositoryHandler.registerReceptionist(newReceptionist);
     }
 
     public PharmacistRegResponse registerPharmacist(PharmacistDetails newPharmacist) {
