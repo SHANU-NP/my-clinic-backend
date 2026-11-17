@@ -10,6 +10,7 @@ public class AuthConstants {
     public static final String INVALID_CREDENTIALS = "Invalid username or password";
     public static final String LOGIN_FAILED = "Login failed, please try after sometime";
     public static final String USERNAME_ALREADY_EXIST = "Username already exists, please try another one";
+    public static final String LOGIN_SUCCESSFUL = "Login successful";
 
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String AUTHORIZATION_HEADER = "Authorization";

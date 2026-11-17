@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static com.myclinic.backend.auth.constants.AuthConstants.INVALID_CREDENTIALS;
+import static com.myclinic.backend.auth.constants.AuthConstants.LOGIN_SUCCESSFUL;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
         }
 
         String token = jwtUtil.generateToken(user);
-        return new LoginResponse(token, user.getRole());
+
+        return new LoginResponse(LOGIN_SUCCESSFUL, token, user.getRole());
     }
 }
