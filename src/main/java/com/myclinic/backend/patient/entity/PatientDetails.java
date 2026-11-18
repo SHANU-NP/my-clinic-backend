@@ -40,9 +40,6 @@ public class PatientDetails extends DBTimeStamp {
     @Column(name = "clinic_id", nullable = false)
     private String clinicId;
 
-    @Column(name = "clinic_name",nullable = false)
-    private String clinicName;
-
     @Column(name = "role", nullable = false)
     private String role;
 

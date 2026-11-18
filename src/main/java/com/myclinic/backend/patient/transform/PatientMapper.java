@@ -6,6 +6,8 @@ import com.myclinic.backend.patient.entity.PatientDetails;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
 
+import static com.myclinic.backend.patient.constants.PatientConstants.PATIENT;
+
 public class PatientMapper {
     public static PatientDetails constructPatientDetails(PatientRegistrationRequest patientRegistrationRequest, ContextUtil contextUtil) {
         PatientDetails patient = new PatientDetails();
@@ -18,6 +20,9 @@ public class PatientMapper {
         patient.setClinicId(contextUtil.getTenantId());
         patient.setEmergencyContactName(patientRegistrationRequest.getEmergencyContactName());
         patient.setEmergencyContactNumber(patientRegistrationRequest.getEmergencyContactNumber());
+        patient.setDob(patientRegistrationRequest.getDob());
+        patient.setGender(patientRegistrationRequest.getGender());
+        patient.setRole(PATIENT);
         return patient;
     }
 
