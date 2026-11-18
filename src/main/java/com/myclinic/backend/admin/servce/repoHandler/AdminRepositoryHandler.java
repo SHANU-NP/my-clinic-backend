@@ -2,7 +2,6 @@ package com.myclinic.backend.admin.servce.repoHandler;
 
 import com.myclinic.backend.admin.constants.AdminConstants;
 import com.myclinic.backend.admin.entity.Clinic;
-import com.myclinic.backend.admin.entity.ClinicUserMap;
 import com.myclinic.backend.doctor.entity.DoctorDetails;
 import com.myclinic.backend.pharmacy.entity.PharmacistDetails;
 import com.myclinic.backend.receptionist.entity.ReceptionistDetails;
@@ -17,7 +16,6 @@ import com.myclinic.backend.receptionist.service.rephandler.ReceptionistReposito
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,14 +25,11 @@ public class AdminRepositoryHandler {
     private final DoctorRepositoryHandler doctorRepositoryHandler;
     private final ReceptionistRepositoryHandler receptionistRepositoryHandler;
     private final PharmacistRepoHandler pharmacistRepositoryHandler;
-    private final ClinicUserMapRepositoryHandler clinicUserMapRepositoryHandler;
-
-    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler, ClinicUserMapRepositoryHandler clinicUserMapRepositoryHandler) {
+    public AdminRepositoryHandler(ClinicRepository clinicRepository, DoctorRepositoryHandler doctorRepositoryHandler, ReceptionistRepositoryHandler receptionistRepositoryHandler, PharmacistRepoHandler pharmacistRepositoryHandler) {
         this.clinicRepository = clinicRepository;
         this.doctorRepositoryHandler = doctorRepositoryHandler;
         this.receptionistRepositoryHandler = receptionistRepositoryHandler;
         this.pharmacistRepositoryHandler = pharmacistRepositoryHandler;
-        this.clinicUserMapRepositoryHandler = clinicUserMapRepositoryHandler;
     }
 
 
@@ -69,7 +64,4 @@ public class AdminRepositoryHandler {
         return pharmacistRepositoryHandler.registerPharmacist(newPharmacist);
     }
 
-    public void persistClinicUsers(List<ClinicUserMap> clinicUserMaps) {
-        clinicUserMapRepositoryHandler.saveAll(clinicUserMaps);
-    }
 }

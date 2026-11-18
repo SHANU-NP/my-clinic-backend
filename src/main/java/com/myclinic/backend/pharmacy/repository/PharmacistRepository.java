@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface PharmacistRepository extends JpaRepository<PharmacistDetails, UUID> {
+    boolean existsByIdAndClinicId(UUID id, String clinicId);
 }

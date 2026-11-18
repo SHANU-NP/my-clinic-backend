@@ -43,10 +43,4 @@ public class AdminController {
         return adminService.registerPharmacist(request);
     }
 
-    @PostMapping("/clinic-activate/{clinicId}")
-    public SuccessMessage activateClinic(@PathVariable String clinicId){
-        return adminService.activateClinic(clinicId);
-    }
-
-
 }

@@ -7,5 +7,5 @@ public class PatientConstants {
 
     public static final String PATIENT_NOT_FOUND = "Patient not found";
     public static final String USER_NOT_ASSOCIATED_WITH_CLINIC = "User is not associated with the clinic";
-    public static final String USER_NOT_ACTIVE = "User is not active in the clinic";
+    public static final String DOB_VALIDATION_ERROR = "Invalid date of birth format. Expected format: yyyy-MM-dd";
 }

@@ -5,6 +5,10 @@ import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+
+import static com.myclinic.backend.patient.constants.PatientConstants.DOB_VALIDATION_ERROR;
+
 @Slf4j
 @Component
 public class PatientValidator {
@@ -16,6 +20,7 @@ public class PatientValidator {
         validateNotBlank("gender", patientRegistrationRequest.getGender());
         validateNotBlank("contactNumber", patientRegistrationRequest.getContactNumber());
         validateNotBlank("address", patientRegistrationRequest.getAddress());
+        ValidateDOB(patientRegistrationRequest.getDob());
     }
 
 
@@ -29,5 +34,16 @@ public class PatientValidator {
             log.error("error : {}",ex.toString());
         }
 
+    }
+
+    private void ValidateDOB(String dob){
+        // Implement DOB validation logic here
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dob);
+        } catch (Exception e) {
+            throw new InvalidRequestExceptions(DOB_VALIDATION_ERROR);
+        }
     }
 }

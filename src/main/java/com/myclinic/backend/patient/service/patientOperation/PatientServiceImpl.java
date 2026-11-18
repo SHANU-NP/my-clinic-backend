@@ -1,8 +1,6 @@
 package com.myclinic.backend.patient.service.patientOperation;
 
-import com.myclinic.backend.admin.entity.ClinicUserMap;
 import com.myclinic.backend.admin.exceptions.InvalidRequestExceptions;
-import com.myclinic.backend.admin.servce.repoHandler.ClinicUserMapRepositoryHandler;
 import com.myclinic.backend.admin.util.ClinicUtil;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.auth.core.ContextUtil;
@@ -13,7 +11,6 @@ import com.myclinic.backend.patient.transform.PatientMapper;
 import com.myclinic.backend.patient.util.PatientValidator;
 import org.springframework.stereotype.Service;
 
-import static com.myclinic.backend.patient.constants.PatientConstants.USER_NOT_ACTIVE;
 import static com.myclinic.backend.patient.constants.PatientConstants.USER_NOT_ASSOCIATED_WITH_CLINIC;
 
 @Service
@@ -38,8 +35,9 @@ public class PatientServiceImpl implements PatientService {
         patientValidator.validatePatientRegistrationRequest(patientRegistrationRequest);
 
         //validate the user
-        if (!clinicUtil.validateUserActiveInClinic(patientRegistrationRequest.getClinicId(), contextUtil.getUserId())) {
-            throw new InvalidRequestExceptions(USER_NOT_ACTIVE);
+        String userRole = contextUtil.getRoles().stream().findFirst().orElse("");
+        if (!clinicUtil.validateUserInClinic(patientRegistrationRequest.getClinicId(), contextUtil.getUserId(), userRole)) {
+            throw new InvalidRequestExceptions(USER_NOT_ASSOCIATED_WITH_CLINIC);
         }
 
         PatientDetails patientDetails = PatientMapper.constructPatientDetails(patientRegistrationRequest, contextUtil);

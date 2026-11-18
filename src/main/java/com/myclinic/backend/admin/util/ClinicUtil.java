@@ -1,24 +1,39 @@
 package com.myclinic.backend.admin.util;
 
-import com.myclinic.backend.admin.entity.ClinicUserMap;
-import com.myclinic.backend.admin.servce.repoHandler.ClinicUserMapRepositoryHandler;
+import com.myclinic.backend.doctor.repository.DoctorRepository;
+import com.myclinic.backend.pharmacy.repository.PharmacistRepository;
+import com.myclinic.backend.receptionist.repository.ReceptionistRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class ClinicUtil {
 
-    private final ClinicUserMapRepositoryHandler clinicUserDao;
+    private final DoctorRepository doctorRepository;
+    private final ReceptionistRepository receptionistRepository;
+    private final PharmacistRepository pharmacistRepository;
 
-    public ClinicUtil(ClinicUserMapRepositoryHandler clinicUserDao) {
-        this.clinicUserDao = clinicUserDao;
+    public ClinicUtil(DoctorRepository doctorRepository, ReceptionistRepository receptionistRepository,
+                      PharmacistRepository pharmacistRepository) {
+        this.doctorRepository = doctorRepository;
+        this.receptionistRepository = receptionistRepository;
+        this.pharmacistRepository = pharmacistRepository;
     }
 
-    public boolean validateUserAssociationWithClinic(String clinicId, String userId) {
-        return clinicUserDao.findByClinicIdAndUserId(clinicId, userId).isPresent();
-    }
+    public boolean validateUserInClinic(String clinicId, String userId, String role) {
+        UUID userUuid;
+        try {
+            userUuid = UUID.fromString(userId);
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
 
-    public boolean validateUserActiveInClinic(String clinicId, String userId) {
-        return clinicUserDao.findByClinicIdAndUserId(clinicId, userId)
-                .filter(ClinicUserMap::isActive).isPresent();
+        return switch (role) {
+            case "DOCTOR" -> doctorRepository.existsByIdAndClinicId(userUuid, clinicId);
+            case "RECEPTIONIST" -> receptionistRepository.existsByIdAndClinicId(userUuid, clinicId);
+            case "PHARMACIST" -> pharmacistRepository.existsByIdAndClinicId(userUuid, clinicId);
+            default -> false;
+        };
     }
 }

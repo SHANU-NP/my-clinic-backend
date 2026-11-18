@@ -18,7 +18,5 @@ public class AdminConstants {
     public static final String USER_NOT_FOUND = "user not found in the system";
     public static final String INVALID_CREDENTIALS = "Invalid username";
     public static final String LOGIN_FAILED = "Login failed, please try after sometime";
-    public static final String NO_USERS_ASSOCIATED_WITH_CLINIC = "No users associated with the clinic";
-    public static final String CLINIC_ACTIVATED_SUCCESSFULLY = "Clinic activated successfully";
 
 }
