@@ -5,6 +5,8 @@ import com.myclinic.backend.admin.model.response.DoctorRegistrationResponse;
 import com.myclinic.backend.doctor.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorRepositoryHandler {
 
@@ -24,5 +26,9 @@ public class DoctorRepositoryHandler {
                 savedDoctor.getDesignation(),
                 savedDoctor.getSpecialization()
         );
+    }
+
+    public List<DoctorDetails> findAllDoctorByClinicId(String clinicId) {
+        return doctorRepository.findAllByClinicId(clinicId);
     }
 }

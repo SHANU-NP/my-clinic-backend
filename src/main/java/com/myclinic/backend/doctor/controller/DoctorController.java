@@ -5,6 +5,7 @@ import com.myclinic.backend.auth.model.request.LoginReq;
 import com.myclinic.backend.doctor.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("http://localhost:50284")
 @RestController
 @RequestMapping("/v1/doctor")
 public class DoctorController {

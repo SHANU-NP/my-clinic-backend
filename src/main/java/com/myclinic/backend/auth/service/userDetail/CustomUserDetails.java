@@ -2,6 +2,7 @@ package com.myclinic.backend.auth.service.userDetail;
 
 import com.myclinic.backend.auth.constants.AuthConstants;
 import com.myclinic.backend.auth.entity.UserAuth;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +16,14 @@ public class CustomUserDetails implements UserDetails {
     private final String userId;
     private final String password;
     private final String authorities;
+    @Getter
+    private final String tenantId;
 
     public CustomUserDetails(UserAuth user) {
         this.userId = user.getUserId().toString();
         this.password = user.getPassword();
         this.authorities = user.getRole();
+        this.tenantId = user.getTenantId();
     }
 
     @Override

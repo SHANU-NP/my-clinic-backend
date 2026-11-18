@@ -4,6 +4,7 @@ import com.myclinic.backend.auth.entity.UserAuth;
 import com.myclinic.backend.auth.repo.UserAuthRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,5 +31,9 @@ public class UserAuthRepoHandler {
 
     public UserAuth save(UserAuth userAuth) {
         return userAuthRepository.save(userAuth);
+    }
+
+    public List<UserAuth> findAllUserByTenantId(String clinicId) {
+        return userAuthRepository.findAllByTenantId(clinicId);
     }
 }

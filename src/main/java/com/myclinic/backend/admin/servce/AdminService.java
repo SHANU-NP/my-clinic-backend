@@ -1,6 +1,7 @@
 package com.myclinic.backend.admin.servce;
 
 import com.myclinic.backend.admin.entity.Clinic;
+import com.myclinic.backend.admin.entity.ClinicUserMap;
 import com.myclinic.backend.admin.model.request.*;
 import com.myclinic.backend.admin.model.response.*;
 import com.myclinic.backend.auth.entity.UserAuth;
@@ -167,5 +168,23 @@ public class AdminService {
         newPharmacist.setClinicId(clinic.getId().toString());
         newPharmacist.setClinicName(clinic.getName());
         return adminRepositoryHandler.registerPharmacist(newPharmacist);
+    }
+
+    public SuccessMessage activateClinic(String clinicId) {
+        Clinic clinic = adminRepositoryHandler.findClinicById(Long.valueOf(clinicId))
+                .orElseThrow(() -> new InvalidRequestExceptions(CLINIC_NOT_FOUND));
+        List<UserAuth> users = userAuthRepoHandler.findAllUserByTenantId(clinicId);
+        if (users.isEmpty()) {
+            throw new InvalidRequestExceptions(NO_USERS_ASSOCIATED_WITH_CLINIC);
+        }
+        List<ClinicUserMap> clinicUserMaps = users.stream().map(user -> {
+            ClinicUserMap clinicUserMap = new ClinicUserMap();
+            clinicUserMap.setClinicId(clinic.getId().toString());
+            clinicUserMap.setUserId(String.valueOf(user.getUserId()));
+            clinicUserMap.setActive(true);
+            return clinicUserMap;
+        }).toList();
+        adminRepositoryHandler.persistClinicUsers(clinicUserMaps);
+        return new SuccessMessage(CLINIC_ACTIVATED_SUCCESSFULLY);
     }
 }

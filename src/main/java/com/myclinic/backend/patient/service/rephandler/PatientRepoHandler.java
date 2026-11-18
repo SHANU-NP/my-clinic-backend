@@ -1,5 +1,6 @@
 package com.myclinic.backend.patient.service.rephandler;
 
+import com.myclinic.backend.patient.entity.PatientDetails;
 import com.myclinic.backend.patient.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +11,9 @@ public class PatientRepoHandler {
 
     public PatientRepoHandler(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
+    }
+
+    public PatientDetails savePatientDetails(PatientDetails patient) {
+      return patientRepository.save(patient);
     }
 }

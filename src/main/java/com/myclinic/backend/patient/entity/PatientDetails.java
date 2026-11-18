@@ -45,4 +45,13 @@ public class PatientDetails extends DBTimeStamp {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    @Column(name = "blood_group")
+    private String bloodGroup;
+
+    @Column(name = "emergency_contact_name")
+    private String emergencyContactName;
+
+    @Column(name = "emergency_contact_number")
+    private String emergencyContactNumber;
 }
