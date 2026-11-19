@@ -25,7 +25,7 @@ public class PatientDoctorConsultationDetail extends DBTimeStamp {
     private String consultationNotes;
 
     private String clinicId;
-    private String patientId;
+    private Long patientId;
     private String doctorId;
 
 }

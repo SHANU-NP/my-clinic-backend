@@ -10,13 +10,16 @@ import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
 import com.myclinic.backend.patient.service.rephandler.PatientAllergyRepoHandler;
 import com.myclinic.backend.patient.service.rephandler.PatientMedicationRepoHandler;
 import com.myclinic.backend.patient.service.rephandler.PatientImmunizationRepoHandler;
+import com.myclinic.backend.patient.service.rephandler.PatientDoctorConsultationDetailRepoHandler;
 import com.myclinic.backend.patient.service.rephandler.PatientRepoHandler;
 import com.myclinic.backend.patient.transform.PatientMapper;
+import com.myclinic.backend.patient.transform.PatientClinicalRecordMapper;
 import com.myclinic.backend.patient.util.PatientValidator;
 import org.springframework.stereotype.Service;
 
 import static com.myclinic.backend.patient.constants.PatientConstants.USER_NOT_ASSOCIATED_WITH_CLINIC;
 import static com.myclinic.backend.patient.constants.PatientConstants.PATIENT_NOT_FOUND;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -27,11 +30,13 @@ public class PatientServiceImpl implements PatientService {
     private final PatientAllergyRepoHandler allergyRepoHandler;
     private final PatientMedicationRepoHandler medicationRepoHandler;
     private final PatientImmunizationRepoHandler immunizationRepoHandler;
+    private final PatientDoctorConsultationDetailRepoHandler consultationRepoHandler;
 
 
     public PatientServiceImpl(PatientRepoHandler patientRepoHandler, PatientValidator patientValidator, ContextUtil contextUtil, ClinicUtil clinicUtil,
                               PatientAllergyRepoHandler allergyRepoHandler, PatientMedicationRepoHandler medicationRepoHandler,
-                              PatientImmunizationRepoHandler immunizationRepoHandler) {
+                              PatientImmunizationRepoHandler immunizationRepoHandler,
+                              PatientDoctorConsultationDetailRepoHandler consultationRepoHandler) {
         this.patientRepoHandler = patientRepoHandler;
         this.patientValidator = patientValidator;
         this.contextUtil = contextUtil;
@@ -39,6 +44,7 @@ public class PatientServiceImpl implements PatientService {
         this.allergyRepoHandler = allergyRepoHandler;
         this.medicationRepoHandler = medicationRepoHandler;
         this.immunizationRepoHandler = immunizationRepoHandler;
+        this.consultationRepoHandler = consultationRepoHandler;
     }
 
 
@@ -52,14 +58,16 @@ public class PatientServiceImpl implements PatientService {
         PatientDetails patient = patientRepoHandler.findPatientByClinicIdAndPatientId(clinicId, patientId)
                 .orElseThrow(() -> new InvalidRequestExceptions(PATIENT_NOT_FOUND));
 
-        //todo : direct entity to response mapping is not a good practice, need to create a mapper for this
-        //todo: fetch the consultation details for the patient and add it to the response
-        //todo: first find the patient consultation details by patientId and clinicId, then with that consultationId, fetch the consultation details and add it to the response
         PatientClinicRecordResponse response = new PatientClinicRecordResponse();
         response.setPatient(PatientMapper.constructPatientResponse(patient));
-        response.setAllergies(allergyRepoHandler.findByClinicAndPatient(clinicId, patientId));
-        response.setMedications(medicationRepoHandler.findByClinicAndPatient(clinicId, patientId));
-        response.setImmunizations(immunizationRepoHandler.findByClinicAndPatient(clinicId, patientId));
+        response.setConsultations(consultationRepoHandler.findByClinicAndPatient(clinicId, patientId).stream()
+                .map(PatientClinicalRecordMapper::toResponse).collect(Collectors.toList()));
+        response.setAllergies(allergyRepoHandler.findByClinicAndPatient(clinicId, patientId).stream()
+                .map(PatientClinicalRecordMapper::toResponse).collect(Collectors.toList()));
+        response.setMedications(medicationRepoHandler.findByClinicAndPatient(clinicId, patientId).stream()
+                .map(PatientClinicalRecordMapper::toResponse).collect(Collectors.toList()));
+        response.setImmunizations(immunizationRepoHandler.findByClinicAndPatient(clinicId, patientId).stream()
+                .map(PatientClinicalRecordMapper::toResponse).collect(Collectors.toList()));
         return response;
     }
 
