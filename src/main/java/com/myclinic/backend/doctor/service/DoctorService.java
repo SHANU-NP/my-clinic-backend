@@ -5,6 +5,7 @@ import com.myclinic.backend.auth.service.UserServiceImpl;
 import com.myclinic.backend.auth.model.request.LoginReq;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
+import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
 import com.myclinic.backend.patient.service.patientOperation.PatientService;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,9 @@ public class DoctorService {
 
     public PatientRegistrationResponse registerPatient(PatientRegistrationRequest request) {
         return patientService.registerPatient(request);
+    }
+
+    public PatientClinicRecordResponse getPatientDetailsByClinicIdAndPatientId(String clinicId, Long patientId) {
+        return patientService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
     }
 }

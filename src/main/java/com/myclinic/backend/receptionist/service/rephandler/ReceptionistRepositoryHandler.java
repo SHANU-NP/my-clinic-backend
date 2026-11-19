@@ -16,7 +16,7 @@ public class ReceptionistRepositoryHandler {
     public ReceptionistRegistrationResponse registerReceptionist(ReceptionistDetails newReceptionist) {
         ReceptionistDetails saved = receptionistRepository.save(newReceptionist);
         return new ReceptionistRegistrationResponse(
-                Long.valueOf(saved.getClinicId()),
+                java.util.UUID.fromString(saved.getClinicId()),
                 saved.getClinicName(),
                 saved.getId(),
                 saved.getName(),

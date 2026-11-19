@@ -5,13 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClinicRegistrationResponse {
 
-    private Long clinicId;
+    private UUID clinicId;
     private String name;
     private String message;
 }

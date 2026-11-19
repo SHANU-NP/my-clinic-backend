@@ -5,6 +5,7 @@ import com.myclinic.backend.auth.model.request.LoginReq;
 import com.myclinic.backend.doctor.service.DoctorService;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
+import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("http://localhost:50284")
@@ -33,7 +34,12 @@ public class DoctorController {
         return doctorService.registerPatient(request);
     }
 
+    @GetMapping("/clinic/{clinicId}/patients/{patientId}")
+    public PatientClinicRecordResponse getPatientDetails(@PathVariable String clinicId, @PathVariable Long patientId) {
+        return doctorService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
+    }
 
+//
 
 
 

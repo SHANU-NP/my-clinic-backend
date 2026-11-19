@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DoctorRegistrationResponse {
 
-    private Long clinicId;
+    private UUID clinicId;
     private String clinicName;
     private UUID doctorId;
     private String doctorName;

@@ -4,6 +4,8 @@ import com.myclinic.backend.patient.entity.PatientDetails;
 import com.myclinic.backend.patient.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PatientRepoHandler {
 
@@ -15,5 +17,9 @@ public class PatientRepoHandler {
 
     public PatientDetails savePatientDetails(PatientDetails patient) {
       return patientRepository.save(patient);
+    }
+
+    public Optional<PatientDetails> findPatientByClinicIdAndPatientId(String clinicId, Long patientId) {
+        return patientRepository.findByClinicIdAndId(clinicId, patientId);
     }
 }

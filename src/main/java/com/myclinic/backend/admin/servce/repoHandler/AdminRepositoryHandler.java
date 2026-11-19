@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AdminRepositoryHandler {
@@ -40,7 +41,7 @@ public class AdminRepositoryHandler {
     }
 
 
-    public Optional<Clinic> findClinicById(Long clinicId) {
+    public Optional<Clinic> findClinicById(UUID clinicId) {
         return clinicRepository.findById(clinicId);
     }
 

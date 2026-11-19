@@ -17,7 +17,7 @@ public class PharmacistRepoHandler {
     public PharmacistRegResponse registerPharmacist(PharmacistDetails newPharmacist) {
         PharmacistDetails saved = pharmacistRepository.save(newPharmacist);
         return new PharmacistRegResponse(
-                Long.valueOf(saved.getClinicId()),
+                java.util.UUID.fromString(saved.getClinicId()),
                 saved.getClinicName(),
                 saved.getId(),
                 saved.getName(),

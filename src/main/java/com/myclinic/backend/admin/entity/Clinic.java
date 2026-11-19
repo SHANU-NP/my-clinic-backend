@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Setter
 @Getter
@@ -16,9 +18,8 @@ public class Clinic {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clinic_seq")
-    @SequenceGenerator(name = "clinic_seq", sequenceName = "clinic_seq",initialValue = 1000, allocationSize = 1)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;

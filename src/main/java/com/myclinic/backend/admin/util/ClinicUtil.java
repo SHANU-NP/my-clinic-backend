@@ -5,6 +5,7 @@ import com.myclinic.backend.pharmacy.repository.PharmacistRepository;
 import com.myclinic.backend.receptionist.repository.ReceptionistRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
 import java.util.UUID;
 
 @Component
@@ -22,6 +23,11 @@ public class ClinicUtil {
     }
 
     public boolean validateUserInClinic(String clinicId, String userId, String role) {
+
+        if (clinicId == null || clinicId.isBlank() || userId == null || userId.isBlank() || role == null || role.isBlank()) {
+            return false;
+        }
+
         UUID userUuid;
         try {
             userUuid = UUID.fromString(userId);
@@ -29,10 +35,14 @@ public class ClinicUtil {
             return false;
         }
 
-        return switch (role) {
+        return switch (role.trim().toUpperCase(Locale.ROOT)) {
+
             case "DOCTOR" -> doctorRepository.existsByIdAndClinicId(userUuid, clinicId);
+
             case "RECEPTIONIST" -> receptionistRepository.existsByIdAndClinicId(userUuid, clinicId);
+
             case "PHARMACIST" -> pharmacistRepository.existsByIdAndClinicId(userUuid, clinicId);
+
             default -> false;
         };
     }

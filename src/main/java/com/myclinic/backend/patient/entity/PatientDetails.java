@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Setter
 @Getter
 @Entity
@@ -13,7 +15,7 @@ public class PatientDetails extends DBTimeStamp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ptn_seq")
-    @SequenceGenerator(name = "ptn_seq", sequenceName = "ptn_seq", initialValue = 600, allocationSize = 1)
+    @SequenceGenerator(name = "ptn_seq", sequenceName = "ptn_seq", initialValue = 10000, allocationSize = 1)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -23,7 +25,7 @@ public class PatientDetails extends DBTimeStamp {
     private String lastName;
 
     @Column(name = "dob")
-    private String dob;
+    private LocalDate dob;
 
     @Column(name = "gender")
     private String gender;
