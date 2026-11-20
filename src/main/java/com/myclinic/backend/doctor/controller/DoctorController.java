@@ -2,6 +2,7 @@ package com.myclinic.backend.doctor.controller;
 
 import com.myclinic.backend.auth.model.response.LoginResponse;
 import com.myclinic.backend.auth.model.request.LoginReq;
+import com.myclinic.backend.doctor.model.response.DoctorProfileResponse;
 import com.myclinic.backend.doctor.service.DoctorService;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
@@ -29,6 +30,12 @@ public class DoctorController {
         return doctorService.login(loginReq);
     }
 
+    @GetMapping("/profile")
+    public DoctorProfileResponse getProfile() {
+        return doctorService.getProfile();
+    }
+
+
     @PostMapping("/register/patient")
     public PatientRegistrationResponse registerPatient(@RequestBody PatientRegistrationRequest request){
         return doctorService.registerPatient(request);
@@ -39,7 +46,6 @@ public class DoctorController {
         return doctorService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
     }
 
-//
 
 
 

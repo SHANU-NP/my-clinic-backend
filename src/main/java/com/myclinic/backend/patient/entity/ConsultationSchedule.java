@@ -3,9 +3,14 @@ package com.myclinic.backend.patient.entity;
 
 import com.myclinic.backend.admin.entity.DBTimeStamp;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+
+@Setter
+@Getter
 @Entity
 @Table(name = "consultation_schedule")
 public class ConsultationSchedule extends DBTimeStamp {
@@ -16,10 +21,16 @@ public class ConsultationSchedule extends DBTimeStamp {
     private Long patientId;
     private Long doctorId;
     private String clinicId;
-    private String consultationDate;
-    private String consultationTime;
+    private LocalDate consultationDate;
+    private OffsetDateTime consultationAt;
+    private String clinicTimeZone;
     private String consultationNotes;
     private String status; // Scheduled, Completed, Cancelled
-
+    private String patientName;
+    private String doctorName;
+    private String doctorSpecialization;
+    private String doctorDesignation;
+    private String patientContactNumber;
+    private String patientAddress;
 
 }

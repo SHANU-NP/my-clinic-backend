@@ -2,16 +2,13 @@ package com.myclinic.backend.patient.service.patientOperation;
 
 import com.myclinic.backend.admin.exceptions.InvalidRequestExceptions;
 import com.myclinic.backend.admin.util.ClinicUtil;
+import com.myclinic.backend.patient.entity.ConsultationSchedule;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.auth.core.ContextUtil;
 import com.myclinic.backend.patient.entity.PatientDetails;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
 import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
-import com.myclinic.backend.patient.service.rephandler.PatientAllergyRepoHandler;
-import com.myclinic.backend.patient.service.rephandler.PatientMedicationRepoHandler;
-import com.myclinic.backend.patient.service.rephandler.PatientImmunizationRepoHandler;
-import com.myclinic.backend.patient.service.rephandler.PatientDoctorConsultationDetailRepoHandler;
-import com.myclinic.backend.patient.service.rephandler.PatientRepoHandler;
+import com.myclinic.backend.patient.service.rephandler.*;
 import com.myclinic.backend.patient.transform.PatientMapper;
 import com.myclinic.backend.patient.transform.PatientClinicalRecordMapper;
 import com.myclinic.backend.patient.util.PatientValidator;
@@ -19,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import static com.myclinic.backend.patient.constants.PatientConstants.USER_NOT_ASSOCIATED_WITH_CLINIC;
 import static com.myclinic.backend.patient.constants.PatientConstants.PATIENT_NOT_FOUND;
+
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,12 +30,13 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMedicationRepoHandler medicationRepoHandler;
     private final PatientImmunizationRepoHandler immunizationRepoHandler;
     private final PatientDoctorConsultationDetailRepoHandler consultationRepoHandler;
+    private final ConsultationScheduleRepoHandler consultationScheduleRepoHandler;
 
 
     public PatientServiceImpl(PatientRepoHandler patientRepoHandler, PatientValidator patientValidator, ContextUtil contextUtil, ClinicUtil clinicUtil,
                               PatientAllergyRepoHandler allergyRepoHandler, PatientMedicationRepoHandler medicationRepoHandler,
                               PatientImmunizationRepoHandler immunizationRepoHandler,
-                              PatientDoctorConsultationDetailRepoHandler consultationRepoHandler) {
+                              PatientDoctorConsultationDetailRepoHandler consultationRepoHandler, ConsultationScheduleRepoHandler consultationScheduleRepoHandler) {
         this.patientRepoHandler = patientRepoHandler;
         this.patientValidator = patientValidator;
         this.contextUtil = contextUtil;
@@ -45,6 +45,7 @@ public class PatientServiceImpl implements PatientService {
         this.medicationRepoHandler = medicationRepoHandler;
         this.immunizationRepoHandler = immunizationRepoHandler;
         this.consultationRepoHandler = consultationRepoHandler;
+        this.consultationScheduleRepoHandler = consultationScheduleRepoHandler;
     }
 
 
@@ -92,6 +93,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void addToConsultationQueue(String patientId, String doctorId) {
+        if (clinicUtil.validateUserInClinic(contextUtil.getTenantId(), contextUtil.getUserId(), contextUtil.getRoles().stream().findFirst().orElse(""))) {
+            List<ConsultationSchedule> consultationList = consultationScheduleRepoHandler.findConsultationByClinicIdAndDoctorId(contextUtil.getTenantId(), Long.parseLong(doctorId));
 
+
+
+        } else {
+            throw new InvalidRequestExceptions(USER_NOT_ASSOCIATED_WITH_CLINIC);
+        }
     }
 }

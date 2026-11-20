@@ -6,6 +6,8 @@ import com.myclinic.backend.doctor.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DoctorRepositoryHandler {
@@ -30,5 +32,9 @@ public class DoctorRepositoryHandler {
 
     public List<DoctorDetails> findAllDoctorByClinicId(String clinicId) {
         return doctorRepository.findAllByClinicId(clinicId);
+    }
+
+    public Optional<DoctorDetails> findById(String doctorId) {
+        return doctorRepository.findById(UUID.fromString(doctorId));
     }
 }
