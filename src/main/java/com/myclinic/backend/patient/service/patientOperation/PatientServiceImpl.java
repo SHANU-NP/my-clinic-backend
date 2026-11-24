@@ -94,7 +94,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void addToConsultationQueue(String patientId, String doctorId) {
         if (clinicUtil.validateUserInClinic(contextUtil.getTenantId(), contextUtil.getUserId(), contextUtil.getRoles().stream().findFirst().orElse(""))) {
-            List<ConsultationSchedule> consultationList = consultationScheduleRepoHandler.findConsultationByClinicIdAndDoctorId(contextUtil.getTenantId(), Long.parseLong(doctorId));
+            List<ConsultationSchedule> consultationList = consultationScheduleRepoHandler.findConsultationByClinicIdAndDoctorIdAnsStatus(
+                    contextUtil.getTenantId(), Long.parseLong(doctorId), "Scheduled");
 
 
 

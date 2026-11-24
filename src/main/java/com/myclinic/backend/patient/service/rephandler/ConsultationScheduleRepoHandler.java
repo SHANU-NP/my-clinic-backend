@@ -24,8 +24,8 @@ public class ConsultationScheduleRepoHandler {
         return repository.findById(scheduleId);
     }
 
-    public List<ConsultationSchedule> findConsultationByClinicIdAndDoctorId(String clinicId, Long patientId) {
-        return repository.findAllByClinicIdAndDoctorIdAndStatusOrderByConsultationAtDesc(clinicId, patientId);
+    public List<ConsultationSchedule> findConsultationByClinicIdAndDoctorIdAnsStatus(String clinicId, Long doctorId,String status) {
+        return repository.findAllByClinicIdAndDoctorIdAndStatusOrderByConsultationAtDesc(clinicId, doctorId, status);
     }
 
 }

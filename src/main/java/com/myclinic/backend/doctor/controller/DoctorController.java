@@ -7,9 +7,9 @@ import com.myclinic.backend.doctor.service.DoctorService;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
 import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("http://localhost:50284")
 @RestController
 @RequestMapping("/v1/doctor")
 public class DoctorController {
@@ -26,6 +26,7 @@ public class DoctorController {
     }
 
     @PostMapping("/login")
+    @SecurityRequirements
     public LoginResponse login(@RequestBody LoginReq loginReq){
         return doctorService.login(loginReq);
     }

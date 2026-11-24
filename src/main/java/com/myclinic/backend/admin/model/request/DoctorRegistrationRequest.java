@@ -12,5 +12,6 @@ public class DoctorRegistrationRequest {
     private String specialization;
     private String username;
     private String password;
+    private String contactNumber;
 
 }

@@ -3,12 +3,14 @@ package com.myclinic.backend.admin.controller;
 import com.myclinic.backend.admin.model.request.*;
 import com.myclinic.backend.admin.model.response.*;
 import com.myclinic.backend.admin.servce.AdminService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/admin")
+@SecurityRequirements
 public class AdminController {
 
 

@@ -102,6 +102,7 @@ public class AdminService {
         newDoctor.setDoctorName(request.getDoctorName());
         newDoctor.setDesignation(request.getDesignation());
         newDoctor.setSpecialization(request.getSpecialization());
+        newDoctor.setContactNumber(request.getContactNumber());
         return adminRepositoryHandler.registerDoctor(newDoctor);
     }
 

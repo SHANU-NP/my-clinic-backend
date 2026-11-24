@@ -8,5 +8,5 @@ import java.util.List;
 public interface ConsultationScheduleRepository extends JpaRepository<ConsultationSchedule, Long> {
 
 
-    List<ConsultationSchedule> findAllByClinicIdAndDoctorIdAndStatusOrderByConsultationAtDesc(String clinicId, Long patientId);
+    List<ConsultationSchedule> findAllByClinicIdAndDoctorIdAndStatusOrderByConsultationAtDesc(String clinicId, Long doctorId, String status);
 }
