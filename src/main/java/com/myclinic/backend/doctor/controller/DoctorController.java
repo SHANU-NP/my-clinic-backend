@@ -19,6 +19,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/v1/doctor")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DoctorController {
 
     private final DoctorService doctorService;
