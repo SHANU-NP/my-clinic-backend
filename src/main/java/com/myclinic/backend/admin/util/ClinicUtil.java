@@ -22,7 +22,7 @@ public class ClinicUtil {
         this.pharmacistRepository = pharmacistRepository;
     }
 
-    public boolean validateUserInClinic(String clinicId, String userId, String role) {
+    public boolean validateUserGeneralValidationInClinic(String clinicId, String userId, String role) {
 
         if (clinicId == null || clinicId.isBlank() || userId == null || userId.isBlank() || role == null || role.isBlank()) {
             return false;

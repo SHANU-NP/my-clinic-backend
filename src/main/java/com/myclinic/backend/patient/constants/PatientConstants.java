@@ -2,6 +2,14 @@ package com.myclinic.backend.patient.constants;
 
 public class PatientConstants {
 
+    public static final String MORNING = "MORNING";
+    public static final String AFTERNOON = "AFTERNOON";
+    public static final String EVENING = "EVENING";
+    public static final String INVALID_SESSION = "Invalid session. Must be one of: MORNING, AFTERNOON, EVENING";
+    public static final String PATIENT_ALREADY_IN_QUEUE = "Patient is already in the consultation queue";
+    public static final String SCHEDULED = "SCHEDULED";
+    public static final String CONSULTATION_DATE_REQUIRED = "Consultation date is required";
+
     private PatientConstants() {}
 
 

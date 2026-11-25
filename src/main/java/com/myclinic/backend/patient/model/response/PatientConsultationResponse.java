@@ -9,5 +9,10 @@ public record PatientConsultationResponse(
         LocalDate consultationDate,
         LocalTime consultationTime,
         String consultationNotes,
-        String doctorId
+        String doctorId,
+        String doctorName,
+        String doctorDesignation,
+        String session,
+        int tokenNumber,
+        String status
 ) {}

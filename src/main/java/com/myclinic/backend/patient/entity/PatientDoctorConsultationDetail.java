@@ -27,5 +27,10 @@ public class PatientDoctorConsultationDetail extends DBTimeStamp {
     private String clinicId;
     private Long patientId;
     private String doctorId;
+    private String doctorName;
+    private String doctorDesignation;
+    private String session; // MORNING, AFTERNOON, EVENING
+    private int tokenNumber;
+    private String status; // Scheduled, Completed, Cancelled
 
 }

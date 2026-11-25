@@ -15,7 +15,8 @@ public final class PatientClinicalRecordMapper {
     public static PatientConsultationResponse toResponse(PatientDoctorConsultationDetail consultation) {
         return new PatientConsultationResponse(
                 consultation.getConsultationId(), consultation.getConsultationDate(), consultation.getConsultationTime(),
-                consultation.getConsultationNotes(), consultation.getDoctorId());
+                consultation.getConsultationNotes(), consultation.getDoctorId(), consultation.getDoctorName(),
+                consultation.getDoctorDesignation(), consultation.getSession(), consultation.getTokenNumber(), consultation.getStatus());
     }
 
     public static PatientAllergyResponse toResponse(PatientAllergy allergy) {

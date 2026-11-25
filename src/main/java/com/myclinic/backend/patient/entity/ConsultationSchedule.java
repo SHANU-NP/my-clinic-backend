@@ -19,18 +19,20 @@ public class ConsultationSchedule extends DBTimeStamp {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long patientId;
-    private Long doctorId;
+    private String doctorId;
     private String clinicId;
     private LocalDate consultationDate;
-    private OffsetDateTime consultationAt;
-    private String clinicTimeZone;
     private String consultationNotes;
-    private String status; // Scheduled, Completed, Cancelled
+    private String status; // SCHEDULED, COMPLETED, CANCELLED
     private String patientName;
     private String doctorName;
     private String doctorSpecialization;
     private String doctorDesignation;
     private String patientContactNumber;
     private String patientAddress;
+    private String session; // MORNING, AFTERNOON, EVENING
+    private int tokenNumber;
+    private String createdBy;
+
 
 }

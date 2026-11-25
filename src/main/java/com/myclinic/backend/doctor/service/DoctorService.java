@@ -8,11 +8,18 @@ import com.myclinic.backend.admin.exceptions.InvalidRequestExceptions;
 import com.myclinic.backend.doctor.entity.DoctorDetails;
 import com.myclinic.backend.doctor.model.response.DoctorProfileResponse;
 import com.myclinic.backend.doctor.service.rephandler.DoctorRepositoryHandler;
+import com.myclinic.backend.patient.model.request.ConsultationRequest;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
+import com.myclinic.backend.patient.model.response.ConsultationQueueResponse;
 import com.myclinic.backend.patient.model.response.PatientRegistrationResponse;
 import com.myclinic.backend.patient.model.response.PatientClinicRecordResponse;
+import com.myclinic.backend.patient.model.response.QueuePatientResponse;
 import com.myclinic.backend.patient.service.patientOperation.PatientService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 import static com.myclinic.backend.doctor.constants.DoctorConstants.DOCTOR_PROFILE_NOT_FOUND;
 
@@ -44,17 +51,19 @@ public class DoctorService {
         return patientService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
     }
 
+    public Page<QueuePatientResponse> getQueuePatients(LocalDate consultationDate, String session, Pageable pageable) {
+        return patientService.getQueuePatients(consultationDate, session, pageable);
+    }
+
     public DoctorProfileResponse getProfile() {
         DoctorDetails doctor = doctorRepositoryHandler.findById(contextUtil.getUserId())
                 .orElseThrow(() -> new InvalidRequestExceptions(DOCTOR_PROFILE_NOT_FOUND));
-        return new DoctorProfileResponse(
-                doctor.getId().toString(),
-                doctor.getDoctorName(),
-                doctor.getContactNumber(),
-                doctor.getDesignation(),
-                doctor.getSpecialization(),
-                doctor.getClinicId(),
-                doctor.getClinicName()
+        return new DoctorProfileResponse(doctor.getId().toString(), doctor.getDoctorName(), doctor.getContactNumber(),
+                doctor.getDesignation(), doctor.getSpecialization(), doctor.getClinicId(), doctor.getClinicName()
         );
+    }
+
+    public ConsultationQueueResponse addToConsultationQueue(ConsultationRequest consultationRequest) {
+        return patientService.addToConsultationQueue(consultationRequest);
     }
 }
