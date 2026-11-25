@@ -69,7 +69,8 @@ public class AdminService {
             } else {
                 clinics.addAll(adminRepositoryHandler.findAll());
             }
-        return clinics.stream().map(clinic -> new ClinicResponse(clinic.getId(), clinic.getName())).collect(Collectors.toList());
+        return clinics.stream().map(clinic -> new ClinicResponse(clinic.getId(), clinic.getName(),
+                clinic.getAddress(), clinic.getContactNumber())).collect(Collectors.toList());
     }
 
 

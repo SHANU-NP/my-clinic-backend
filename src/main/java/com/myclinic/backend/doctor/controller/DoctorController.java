@@ -49,9 +49,10 @@ public class DoctorController {
         return doctorService.registerPatient(request);
     }
 
-    @GetMapping("/clinic/{clinicId}/patients/{patientId}")
-    public PatientClinicRecordResponse getPatientDetails(@PathVariable String clinicId, @PathVariable Long patientId) {
-        return doctorService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
+    //add to consultation queue endpoint by doctor
+    @PostMapping("/queue/patients")
+    public ConsultationQueueResponse addToConsultationQueue(@RequestBody ConsultationRequest consultationRequest) {
+        return doctorService.addToConsultationQueue(consultationRequest);
     }
 
     @GetMapping("/queue/patients")
@@ -61,11 +62,14 @@ public class DoctorController {
         return doctorService.getQueuePatients(consultationDate, session, pageable);
     }
 
-    //add to consultation queue endpoint by doctor
-     @PostMapping("/queue/patients")
-     public ConsultationQueueResponse addToConsultationQueue(@RequestBody ConsultationRequest consultationRequest) {
-         return doctorService.addToConsultationQueue(consultationRequest);
-     }
+    @GetMapping("/clinic/{clinicId}/patients/{patientId}")
+    public PatientClinicRecordResponse getPatientDetails(@PathVariable String clinicId, @PathVariable Long patientId) {
+        return doctorService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
+    }
+
+
+
+
 
 
 

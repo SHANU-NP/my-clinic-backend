@@ -13,5 +13,8 @@ public class ClinicResponse {
 
     private UUID clinicId;
     private String clinicName;
+    // Additional fields can be added here as needed
+    private String clinicAddress;
+    private String clinicContactNumber;
 
 }

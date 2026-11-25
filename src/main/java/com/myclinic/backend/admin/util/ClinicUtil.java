@@ -46,4 +46,19 @@ public class ClinicUtil {
             default -> false;
         };
     }
+
+    public boolean doctorValidationInClinic(String clinicId, String doctorId) {
+        if (clinicId == null || clinicId.isBlank() || doctorId == null || doctorId.isBlank()) {
+            return false;
+        }
+
+        UUID doctorUuid;
+        try {
+            doctorUuid = UUID.fromString(doctorId);
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
+
+        return doctorRepository.existsByIdAndClinicId(doctorUuid, clinicId);
+    }
 }

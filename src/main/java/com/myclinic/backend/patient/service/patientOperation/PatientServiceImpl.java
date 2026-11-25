@@ -58,8 +58,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientClinicRecordResponse getPatientDetailsByClinicIdAndPatientId(String clinicId, Long patientId) {
         String userRole = contextUtil.getRoles().stream().findFirst().orElse("");
-        if (!clinicUtil.validateUserGeneralValidationInClinic(clinicId, contextUtil.getUserId(), userRole)) {
-            throw new InvalidRequestExceptions(USER_NOT_ASSOCIATED_WITH_CLINIC);
+        if (!clinicUtil.doctorValidationInClinic(clinicId, contextUtil.getUserId())) {
+            throw new InvalidRequestExceptions(DOCTOR_NOT_ASSOCIATED_WITH_CLINIC);
         }
 
         PatientDetails patient = patientRepoHandler.findPatientByClinicIdAndPatientId(clinicId, patientId)

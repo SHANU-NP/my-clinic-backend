@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.myclinic.backend.doctor.constants.DoctorConstants.DOCTOR_PROFILE_NOT_FOUND;
 
@@ -43,18 +44,6 @@ public class DoctorService {
         return userService.login(loginReq.getUsername(), loginReq.getPassword());
     }
 
-    public PatientRegistrationResponse registerPatient(PatientRegistrationRequest request) {
-        return patientService.registerPatient(request);
-    }
-
-    public PatientClinicRecordResponse getPatientDetailsByClinicIdAndPatientId(String clinicId, Long patientId) {
-        return patientService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
-    }
-
-    public Page<QueuePatientResponse> getQueuePatients(LocalDate consultationDate, String session, Pageable pageable) {
-        return patientService.getQueuePatients(consultationDate, session, pageable);
-    }
-
     public DoctorProfileResponse getProfile() {
         DoctorDetails doctor = doctorRepositoryHandler.findById(contextUtil.getUserId())
                 .orElseThrow(() -> new InvalidRequestExceptions(DOCTOR_PROFILE_NOT_FOUND));
@@ -63,7 +52,29 @@ public class DoctorService {
         );
     }
 
+    public List<DoctorProfileResponse> getDoctorsByClinicId(String clinicId) {
+        return doctorRepositoryHandler.findAllDoctorByClinicId(clinicId).stream()
+                .map(doctor -> new DoctorProfileResponse(doctor.getId().toString(), doctor.getDoctorName(),
+                        doctor.getContactNumber(), doctor.getDesignation(), doctor.getSpecialization(),
+                        doctor.getClinicId(), doctor.getClinicName()))
+                .toList();
+    }
+
+
+    public PatientRegistrationResponse registerPatient(PatientRegistrationRequest request) {
+        return patientService.registerPatient(request);
+    }
+
     public ConsultationQueueResponse addToConsultationQueue(ConsultationRequest consultationRequest) {
         return patientService.addToConsultationQueue(consultationRequest);
     }
+
+    public Page<QueuePatientResponse> getQueuePatients(LocalDate consultationDate, String session, Pageable pageable) {
+        return patientService.getQueuePatients(consultationDate, session, pageable);
+    }
+
+    public PatientClinicRecordResponse getPatientDetailsByClinicIdAndPatientId(String clinicId, Long patientId) {
+        return patientService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
+    }
+
 }
