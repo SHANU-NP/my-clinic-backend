@@ -6,7 +6,9 @@ import com.myclinic.backend.auth.service.UserServiceImpl;
 import com.myclinic.backend.auth.model.request.LoginReq;
 import com.myclinic.backend.admin.exceptions.InvalidRequestExceptions;
 import com.myclinic.backend.doctor.entity.DoctorDetails;
+import com.myclinic.backend.doctor.model.response.DoctorInfo;
 import com.myclinic.backend.doctor.model.response.DoctorProfileResponse;
+import com.myclinic.backend.doctor.model.response.DoctorResponse;
 import com.myclinic.backend.doctor.service.rephandler.DoctorRepositoryHandler;
 import com.myclinic.backend.patient.model.request.ConsultationRequest;
 import com.myclinic.backend.patient.model.request.PatientRegistrationRequest;
@@ -20,7 +22,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static com.myclinic.backend.doctor.constants.DoctorConstants.DOCTOR_PROFILE_NOT_FOUND;
 
@@ -52,12 +53,12 @@ public class DoctorService {
         );
     }
 
-    public List<DoctorProfileResponse> getDoctorsByClinicId(String clinicId) {
-        return doctorRepositoryHandler.findAllDoctorByClinicId(clinicId).stream()
-                .map(doctor -> new DoctorProfileResponse(doctor.getId().toString(), doctor.getDoctorName(),
-                        doctor.getContactNumber(), doctor.getDesignation(), doctor.getSpecialization(),
-                        doctor.getClinicId(), doctor.getClinicName()))
-                .toList();
+    public DoctorResponse getDoctorsByClinicId() {
+        String tenantId = contextUtil.getTenantId();
+        return new DoctorResponse(doctorRepositoryHandler.findAllDoctorByClinicId(tenantId).stream()
+                .map(doctor -> new DoctorInfo(doctor.getId().toString(), doctor.getDoctorName(),
+                        doctor.getDesignation(), doctor.getSpecialization()))
+                .toList());
     }
 
 
@@ -76,5 +77,7 @@ public class DoctorService {
     public PatientClinicRecordResponse getPatientDetailsByClinicIdAndPatientId(String clinicId, Long patientId) {
         return patientService.getPatientDetailsByClinicIdAndPatientId(clinicId, patientId);
     }
+
+
 
 }
